@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">OpenNest</string>
+    <string name="set">Set</string>
+    <string name="failed_to_refresh_nest_devices">Failed to refresh Nest device information!</string>
+    <string name="login_failed">Failed to login to Nest!</string>
+    <string name="failed_to_set_temp">Failed to set new temperature.</string>
+    <string name="failed_to_set_away">Failed to set away status.</string>
+    <string name="login_dialog_title">Logging into Nest</string>
+    <string name="login_dialog_message">Please wait as we gather information about your Nest</string>
+</resources>

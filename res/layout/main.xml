@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:floatinghints="http://schemas.android.com/apk/res/com.jbirdvegas.nest"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="BirdNest -Proof of concept"
+        android:id="@+id/main_menu_title"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="8dp"/>
+
+    <com.kevinj.floatlabelpattern.FloatLabelTextView
+        android:id="@+id/user_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        floatinghints:editText_hint="Email..."
+        />
+    <com.kevinj.floatlabelpattern.FloatLabelTextView
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        floatinghints:editText_hint="Password..."
+        floatinghints:editText_inputType="?android:attr/password"
+        />
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"/>
+</LinearLayout>
+
