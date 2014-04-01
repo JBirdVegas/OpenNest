@@ -20,4 +20,6 @@ public class NestConstants {
     public static final String AWAY = "is_away";
     public static final String NEST_HELPER = "nest_helper";
     public static final String IS_WORKING = "performing_work";
+    public static final String WEARABLE_TEMP_CHANGE = "wearable_temp_change";
+    public static final int WEARABLE_TEMP_CHANGE_REQUEST_CODE = 42; // Zen
 }

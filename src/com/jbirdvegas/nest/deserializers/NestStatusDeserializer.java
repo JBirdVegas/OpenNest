@@ -1,4 +1,4 @@
-package com.jbirdvegas.nest;
+package com.jbirdvegas.nest.deserializers;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonDeserializationContext;

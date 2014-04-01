@@ -1,5 +1,7 @@
 package com.jbirdvegas.nest.views;
 
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.text.InputType;
@@ -11,20 +13,17 @@ import android.widget.TextView;
 import com.jbirdvegas.nest.NestHelper;
 import com.jbirdvegas.nest.R;
 import com.jbirdvegas.nest.constants.NestConstants;
-import com.jbirdvegas.nest.helpers.FunctionHelper;
-import com.jbirdvegas.nest.models.ValueObjectListWrapper;
 import com.jbirdvegas.nest.models.valueobjects.SharedValueObject;
-import com.jbirdvegas.nest.models.valueobjects.ValueObject;
-import com.jbirdvegas.nest.services.NestService;
+import com.jbirdvegas.nest.utils.NestAndroidHelper;
 import com.jbirdvegas.nest.utils.TempConversion;
 import com.kevinj.floatlabelpattern.FloatLabelTextView;
-
-import java.util.ArrayList;
+import com.wearables.WearableHelper;
 
 /**
  * Created by jbird: 3/27/14
  */
 public class NestDeviceView extends LinearLayout {
+    private Context mContext;
     private SharedValueObject mThermostat;
     private NestHelper mHelper;
     private TextView mDeviceName;
@@ -32,8 +31,9 @@ public class NestDeviceView extends LinearLayout {
     private Button mSetButton;
     private FloatLabelTextView mNewTemp;
 
-    public NestDeviceView(Context context, NestHelper helper, final SharedValueObject thermostat) {
+    public NestDeviceView(final Context context, final NestHelper helper, final SharedValueObject thermostat) {
         super(context);
+        mContext = context;
         mThermostat = thermostat;
         mHelper = helper;
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -44,25 +44,30 @@ public class NestDeviceView extends LinearLayout {
             @Override
             public void onClick(View view) {
                 int temp = Integer.parseInt(mNewTemp.getText());
-                Intent intent = new Intent(getContext(), NestService.class);
-                intent.setAction(NestConstants.SET_TEMP);
-                intent.putExtra(NestConstants.INTENT_EXTRAS_NEST_HELPER, mHelper);
-                intent.putExtra(NestConstants.NEW_TEMPERATURE, temp);
-                ValueObjectListWrapper wrapper = new ValueObjectListWrapper((ArrayList<ValueObject>)
-                        FunctionHelper.getSharedValueObjects(mHelper, thermostat.getName()));
-                intent.putExtra(NestConstants.VALUE_OBJECTS_LIST, wrapper);
+                Intent intent = NestAndroidHelper.getChangeTempIntent(context, temp, helper, thermostat);
                 getContext().startService(intent);
             }
         });
-
         setScreenValues();
+        updateWearables();
     }
 
-    public NestDeviceView updateDevice(NestHelper helper, SharedValueObject thermostat) {
+    public NestDeviceView updateDevice(Context context, NestHelper helper, SharedValueObject thermostat) {
+        mContext = context;
         mHelper = helper;
         mThermostat = thermostat;
         setScreenValues();
+        updateWearables();
         return this;
+    }
+
+    private void updateWearables() {
+        Notification setAbleTemperatureActions = WearableHelper.getSetAbleTemperatureActions(mContext,
+                mHelper,
+                mThermostat,
+                (int) mThermostat.getCurrentTemp());
+        NotificationManager manager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+        manager.notify(NestConstants.WEARABLE_TEMP_CHANGE_REQUEST_CODE, setAbleTemperatureActions);
     }
 
     public String getDeviceName() {

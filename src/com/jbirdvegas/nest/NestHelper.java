@@ -2,6 +2,8 @@ package com.jbirdvegas.nest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.jbirdvegas.nest.deserializers.NestStatusDeserializer;
+import com.jbirdvegas.nest.deserializers.WeatherDeserializer;
 import com.jbirdvegas.nest.exceptions.NestSetupIncompleteException;
 import com.jbirdvegas.nest.models.ChangeAutoAwayObject;
 import com.jbirdvegas.nest.models.ChangeTempObject;

@@ -51,7 +51,7 @@ public class NestClient extends Activity implements SwipeRefreshLayout.OnRefresh
                             NestDeviceView deviceView = (NestDeviceView) mDevicesLayout.getChildAt(i);
                             List<NestValue> devices = FunctionHelper.getDeviceObjects(mNestHelper, deviceView.getDeviceName());
                             SharedValueObject deviceObject = (SharedValueObject) devices.get(0);
-                            deviceView.updateDevice(mNestHelper, deviceObject);
+                            deviceView.updateDevice(getApplicationContext(), mNestHelper, deviceObject);
                         }
                         break;
                     case NestConstants.DELIVER_SETTING_COMPLETE_RESPONSE:

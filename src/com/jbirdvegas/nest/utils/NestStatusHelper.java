@@ -2,7 +2,7 @@ package com.jbirdvegas.nest.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.jbirdvegas.nest.NestStatusDeserializer;
+import com.jbirdvegas.nest.deserializers.NestStatusDeserializer;
 import com.jbirdvegas.nest.models.NestStatus;
 import com.jbirdvegas.nest.models.valueobjects.ValueObject;
 

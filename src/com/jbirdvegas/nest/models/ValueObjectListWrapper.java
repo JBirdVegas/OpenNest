@@ -6,7 +6,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * Created by jbird: 3/29/14
+ * This class is a wrapper that allows passing a List of custom objects through
+ * through an intent bundle.
  */
 public class ValueObjectListWrapper implements Serializable {
     private ArrayList<ValueObject> mValueObjects = new ArrayList<>(0);

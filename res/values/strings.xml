@@ -8,4 +8,6 @@
     <string name="failed_to_set_away">Failed to set away status.</string>
     <string name="login_dialog_title">Logging into Nest</string>
     <string name="login_dialog_message">Please wait as we gather information about your Nest</string>
+    <string name="set_temp_wearable">Set Temperature to...</string>
+    <string name="change_temp">Change Temp</string>
 </resources>
