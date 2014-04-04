@@ -21,7 +21,7 @@ public class NestAndroidHelper {
         Intent intent = new Intent(context, NestService.class);
         intent.setAction(NestConstants.SET_TEMP);
         intent.putExtra(NestConstants.INTENT_EXTRAS_NEST_HELPER, helper);
-        intent.putExtra(NestConstants.NEW_TEMPERATURE, newTemp);
+        intent.putExtra(NestConstants.NEW_TEMPERATURE, newTemp);//TempConversion.getFahrenheit(newTemp));
         ValueObjectListWrapper wrapper = new ValueObjectListWrapper((ArrayList<ValueObject>)
                 FunctionHelper.getSharedValueObjects(helper, thermostat.getName()));
         intent.putExtra(NestConstants.VALUE_OBJECTS_LIST, wrapper);

@@ -6,6 +6,7 @@ import com.jbirdvegas.nest.NestHelper;
 import com.jbirdvegas.nest.constants.NestConstants;
 import com.jbirdvegas.nest.models.valueobjects.SharedValueObject;
 import com.jbirdvegas.nest.utils.NestAndroidHelper;
+import com.jbirdvegas.nest.utils.TempConversion;
 
 /**
  * Created by jbird: 3/31/14
@@ -24,7 +25,7 @@ public class WearableWrapper {
         mHelper = helper;
         mThermostat = thermostat;
         mIcon = icon;
-        mTitle = title;
+        mTitle = String.valueOf(TempConversion.getFahrenheit(temp));
         mCurrentTemp = temp;
         mPendingIntent = getTempIntent(temp);
     }

@@ -76,6 +76,7 @@ public class NestClient extends Activity implements SwipeRefreshLayout.OnRefresh
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.client_main);
+        Intent intent = getIntent();
         mNestHelper = (NestHelper) getIntent().getSerializableExtra(NestConstants.INTENT_EXTRAS_NEST_HELPER);
         mAwaySwitch = (Switch) findViewById(R.id.whole_home_away_switch);
         mDevicesLayout = (LinearLayout) findViewById(R.id.devices_layout);

@@ -13,30 +13,39 @@ import com.jbirdvegas.nest.wearables.WearableWrapper;
  */
 public class WearableHelper {
     public static Notification getSetAbleTemperatureActions(Context context, NestHelper helper, SharedValueObject thermostat, int currentTemp) {
-        int max = currentTemp + 5;
-        int min = currentTemp - 5;
+        int max = currentTemp + 3;
+        int min = currentTemp - 3;
 
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(context)
-                        .setContentTitle(String.valueOf(R.string.app_name))
+                        .setContentTitle(thermostat.getName())
                         .setContentText(context.getString(R.string.set_temp_wearable))
                         .setSmallIcon(R.drawable.ic_launcher);
-        for (int i = currentTemp; currentTemp + max > i; i++) {
-            WearableWrapper wearableWrapper = new WearableWrapper(context,
-                    helper,
-                    thermostat,
-                    R.drawable.ic_launcher,
-                    context.getString(R.string.change_temp), i);
-            notificationBuilder.addAction(wearableWrapper.getIcon(), wearableWrapper.getTitle(), wearableWrapper.getPendingIntent());
+
+        int counter = currentTemp;
+        while (max > counter) {
+            makeNotificationFor(notificationBuilder, counter++, context, helper, thermostat);
         }
-        for (int i = currentTemp; currentTemp - min > i; i--) {
-            WearableWrapper wearableWrapper = new WearableWrapper(context,
-                    helper,
-                    thermostat,
-                    R.drawable.ic_launcher,
-                    context.getString(R.string.change_temp), i);
-            notificationBuilder.addAction(wearableWrapper.getIcon(), wearableWrapper.getTitle(), wearableWrapper.getPendingIntent());
+        counter = currentTemp;
+        while (min < counter) {
+            makeNotificationFor(notificationBuilder, counter--, context, helper, thermostat);
         }
+
         return notificationBuilder.build();
+    }
+
+    private static void makeNotificationFor(NotificationCompat.Builder notificationBuilder,
+                                            int counter,
+                                            Context context,
+                                            NestHelper helper,
+                                            SharedValueObject thermostat) {
+        counter++;
+        WearableWrapper wearableWrapper = new WearableWrapper(context,
+                helper,
+                thermostat,
+                R.drawable.ic_launcher,
+                context.getString(R.string.change_temp),
+                counter);
+        notificationBuilder.addAction(wearableWrapper.getIcon(), wearableWrapper.getTitle(), wearableWrapper.getPendingIntent());
     }
 }

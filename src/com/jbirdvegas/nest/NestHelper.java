@@ -207,7 +207,7 @@ public class NestHelper implements Serializable {
         // TODO: throw new HttpException(statusCode);  ?
     }
 
-    private TempPayload getTemperatureObject(Session session, List<ValueObject> devices, int fahrenheit) {
+    private TempPayload getTemperatureObject(Session session, List<ValueObject> devices, int celsius) {
         TempPayload payload = new TempPayload();
         String userSession = String.format("android-%s-%d", session.getUserId(), System.nanoTime());
         payload.setSession(userSession);
@@ -215,7 +215,8 @@ public class NestHelper implements Serializable {
         NestTempValues valueObject = new NestTempValues();
         valueObject.setTargetChangePending(true);
         valueObject.setTouchedBy(new TouchedByObject(5));
-        valueObject.setTargetTemp(TempConversion.getCelsius(fahrenheit));
+//        double celsius = TempConversion.getCelsius(fahrenheit);
+        valueObject.setTargetTemp(celsius);
 
         List<ChangeTempObject> tempObjectList = new ArrayList<ChangeTempObject>(0);
         for (ValueObject device : devices) {
